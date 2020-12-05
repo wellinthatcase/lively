@@ -5,7 +5,7 @@
 #include <Windows.h>
 
 #define LIVELY_EXSTYLE NULL
-#define LIVELY_NAME (constexpr wchar_t[14])L"Untitled Note"
+#define LIVELY_NAME (const wchar_t[14])L"Untitled Note"
 
 #define LIVELY_WMSG_MIN 0
 #define LIVELY_WMSG_MAX 0
