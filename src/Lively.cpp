@@ -1,55 +1,43 @@
-﻿#ifndef UNICODE
-#define UNICODE
-#endif
+﻿#include "Lively.h"
 
-#include <Windows.h>
-
-#define LIVELY_EXSTYLE NULL
-#define LIVELY_NAME (const wchar_t[14])L"Untitled Note"
-
-#define LIVELY_WMSG_MIN 0
-#define LIVELY_WMSG_MAX 0
-
-#define LIVELY_STD_WIN_WIDTH 500
-#define LIVELY_STD_WIN_HEIGHT 500
-
-#define MSG_INTERVAL_DURATION 65 // ms
-#define LIVELY_HBRUSH (HBRUSH)(COLOR_WINDOW + 1)
-
-LRESULT CALLBACK WndProc(
+LRESULT CALLBACK WindowProcedure(
 	HWND   hwnd,
 	UINT   uMsg,
 	WPARAM WPrm,
 	LPARAM LPrm
 );
 
-INT WINAPI wWinMain(
-	HINSTANCE hInstance,
-	HINSTANCE prevhInst,
-	LPWSTR    pCmdLine,
-	INT       nCmdShow
+INT WINAPI WinMain(
+	_In_     HINSTANCE hInstance,
+	_In_opt_ HINSTANCE prevhInst,
+	_In_     LPSTR     pCmdLine,
+	_In_     INT       nCmdShow
 )
 {
 	WNDCLASS wc = { };
+	
+	wc.hInstance     = hInstance;
+	wc.lpfnWndProc   = WindowProcedure;
 
-	wc.style = CS_HREDRAW | CS_VREDRAW;
-	wc.hCursor = LoadCursor(hInstance, IDC_ARROW);
-	wc.hInstance = hInstance;
-	wc.lpfnWndProc = WndProc;
-	wc.lpszClassName = LIVELY_NAME;
-	wc.hbrBackground = LIVELY_HBRUSH;
+	wc.hIcon         = WINDOW_ICONS;
+	wc.style         = WINDOW_STYLE;
+	wc.hCursor       = WINDOW_CURSR;
+	wc.cbClsExtra    = EXTRA_BYTES;
+	wc.cbWndExtra    = EXTRA_BYTES;
+	wc.lpszClassName = WINDOW_CNAME;
+	wc.hbrBackground = WINDOW_BRUSH;
 
 	RegisterClassW(&wc);
 
-	HWND hwnd = CreateWindowEx(
-		LIVELY_EXSTYLE,
-		LIVELY_NAME,
-		LIVELY_NAME,
-		WS_OVERLAPPEDWINDOW | WS_VISIBLE,
+	HWND hwnd = CreateWindowExW(
+		NULL,
+		WINDOW_CNAME,
+		WINDOW_CNAME,
+		WINDOW_FLAGS,
 		CW_USEDEFAULT,
 		CW_USEDEFAULT,
-		LIVELY_STD_WIN_WIDTH,
-		LIVELY_STD_WIN_HEIGHT,
+		PX_WIN_WIDTH,
+		PX_WIN_HEIGHT,
 		NULL,
 		NULL,
 		hInstance,
@@ -62,17 +50,17 @@ INT WINAPI wWinMain(
 	ShowWindow(hwnd, nCmdShow);
 
 	MSG message = { };
-	while (GetMessage(&message, hwnd, LIVELY_WMSG_MIN, LIVELY_WMSG_MAX))
+	while (GetMessage(&message, hwnd, WMSG_MIN, WMSG_MAX))
 	{
 		TranslateMessage(&message);
 		DispatchMessageW(&message);
-		Sleep(MSG_INTERVAL_DURATION);
+		Sleep(MSG_INTERVAL_DURATION_IN_MS);
 	}
 
 	return message.wParam ? TRUE : FALSE;
 }
 
-LRESULT CALLBACK WndProc(
+LRESULT CALLBACK WindowProcedure(
 	HWND   hwnd,
 	UINT   uMsg,
 	WPARAM WPrm,
@@ -96,7 +84,7 @@ LRESULT CALLBACK WndProc(
 		PAINTSTRUCT paint = { };
 		HDC hdc = BeginPaint(hwnd, &paint);
 
-		FillRect(hdc, &paint.rcPaint, LIVELY_HBRUSH);
+		FillRect(hdc, &paint.rcPaint, WINDOW_BRUSH);
 		EndPaint(hwnd, &paint);
 	}
 	return TRUE;
