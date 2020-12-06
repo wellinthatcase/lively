@@ -1,12 +1,5 @@
 ﻿#include "Lively.h"
 
-LRESULT CALLBACK WindowProcedure(
-	HWND   hwnd,
-	UINT   uMsg,
-	WPARAM WPrm,
-	LPARAM LPrm
-);
-
 INT WINAPI WinMain(
 	_In_     HINSTANCE hInstance,
 	_In_opt_ HINSTANCE prevhInst,
@@ -14,6 +7,9 @@ INT WINAPI WinMain(
 	_In_     INT       nCmdShow
 )
 {
+	UNREFERENCED_PARAMETER(pCmdLine);
+	UNREFERENCED_PARAMETER(prevhInst);
+
 	WNDCLASS wc = { };
 	
 	wc.hInstance     = hInstance;
@@ -54,7 +50,7 @@ INT WINAPI WinMain(
 	{
 		TranslateMessage(&message);
 		DispatchMessageW(&message);
-		Sleep(MSG_INTERVAL_DURATION_IN_MS);
+		Sleep(MSG_COOLDOWN_IN_MS);
 	}
 
 	return message.wParam ? TRUE : FALSE;
