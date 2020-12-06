@@ -9,7 +9,7 @@ INT WINAPI WinMain(
 {
 	UNREFERENCED_PARAMETER(pCmdLine);
 	UNREFERENCED_PARAMETER(prevhInst);
-
+	 
 	WNDCLASS wc = { };
 	
 	wc.hInstance     = hInstance;
@@ -25,7 +25,7 @@ INT WINAPI WinMain(
 
 	RegisterClassW(&wc);
 
-	HWND hwnd = CreateWindowExW(
+	HWND hwnd = CreateWindowEx(
 		NULL,
 		WINDOW_CNAME,
 		WINDOW_CNAME,
@@ -50,17 +50,17 @@ INT WINAPI WinMain(
 	{
 		TranslateMessage(&message);
 		DispatchMessageW(&message);
-		Sleep(MSG_COOLDOWN_IN_MS);
+		Sleep(COOLDOWN_MS);
 	}
 
 	return message.wParam ? TRUE : FALSE;
 }
 
 LRESULT CALLBACK WindowProcedure(
-	HWND   hwnd,
-	UINT   uMsg,
-	WPARAM WPrm,
-	LPARAM LPrm
+	_In_ HWND   hwnd,
+	_In_ UINT   uMsg,
+	_In_ WPARAM WPrm,
+	_In_ LPARAM LPrm
 )
 {
 	switch (uMsg)
@@ -69,11 +69,11 @@ LRESULT CALLBACK WindowProcedure(
 		if (MessageBox(hwnd, L"Are you sure you wanna quit?", L"Confirm", MB_YESNO) == IDYES) {
 			DestroyWindow(hwnd);
 		}
-		return TRUE;
+		return FALSE;
 
 	case WM_DESTROY:
 		PostQuitMessage(0);
-		return TRUE;
+		return FALSE;
 
 	case WM_PAINT:
 	{
@@ -83,7 +83,7 @@ LRESULT CALLBACK WindowProcedure(
 		FillRect(hdc, &paint.rcPaint, WINDOW_BRUSH);
 		EndPaint(hwnd, &paint);
 	}
-	return TRUE;
+	return FALSE;
 
 	default:
 		return DefWindowProc(hwnd, uMsg, WPrm, LPrm);
