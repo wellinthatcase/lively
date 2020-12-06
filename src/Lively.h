@@ -26,6 +26,6 @@ LRESULT CALLBACK WindowProcedure(
 #define WMSG_MIN 0
 #define WMSG_MAX 0
 #define EXTRA_BYTES 0
-#define MSG_INTERVAL_IN_MS 65
+#define MSG_COOLDOWN_IN_MS 65
 
 #endif /* LIVELY */
