@@ -1,3 +1,7 @@
+// ----------------------------------------------- //
+//		    © 2020 - All rights reserved.          // 
+// ----------------------------------------------- //
+
 #pragma once
 #pragma comment(lib, "gdi32.lib")
 #pragma comment(lib, "User32.lib")
@@ -19,7 +23,6 @@ namespace Lively {
 	using namespace System::Windows::Forms;
 	using namespace System::ComponentModel;
 
-
 	public ref class Lively : public System::Windows::Forms::Form
 	{
 	public:
@@ -34,14 +37,17 @@ namespace Lively {
 			if (components) delete components;
 		}
 
-	private: System::Windows::Forms::Panel^ ConfigPanel;
-	private: System::Windows::Forms::Panel^ Lively_TitleBar;
+	private: System::Windows::Forms::Panel^ TitleBar;
+	private: System::Windows::Forms::PictureBox^ eXitButton;
+	private: System::Windows::Forms::PictureBox^ Minimize;
+	private: System::Windows::Forms::PictureBox^ NewNoteHeader;
+	private: System::Windows::Forms::Panel^ UnderlineNoteName;
 
-	private: System::Windows::Forms::PictureBox^ Lively_Icon;
-	private: System::Windows::Forms::PictureBox^ Lively_eXit;
-	private: System::Windows::Forms::PictureBox^ Lively_Minimize;
-
-	private: System::Windows::Forms::TextBox^ Note_Title;
+	private: System::Windows::Forms::TextBox^ NoteTitleInput;
+	private: System::Windows::Forms::PictureBox^ PassedFilename;
+	private: System::Windows::Forms::PictureBox^ InvalidFileName;
+	private: System::Windows::Forms::PictureBox^ LivelyLogo;
+	private: System::Windows::Forms::Label^ CopyrightDisclaimer;
 
 	private:
 		System::ComponentModel::Container^ components;
@@ -49,109 +55,193 @@ namespace Lively {
 		void InitializeComponent(void)
 		{
 			System::ComponentModel::ComponentResourceManager^ resources = (gcnew System::ComponentModel::ComponentResourceManager(Lively::typeid));
-			this->Lively_TitleBar = (gcnew System::Windows::Forms::Panel());
-			this->Lively_eXit = (gcnew System::Windows::Forms::PictureBox());
-			this->Lively_Icon = (gcnew System::Windows::Forms::PictureBox());
-			this->Lively_Minimize = (gcnew System::Windows::Forms::PictureBox());
-			this->ConfigPanel = (gcnew System::Windows::Forms::Panel());
-			this->Note_Title = (gcnew System::Windows::Forms::TextBox());
-			this->Lively_TitleBar->SuspendLayout();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Lively_eXit))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Lively_Icon))->BeginInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Lively_Minimize))->BeginInit();
-			this->ConfigPanel->SuspendLayout();
+			this->TitleBar = (gcnew System::Windows::Forms::Panel());
+			this->LivelyLogo = (gcnew System::Windows::Forms::PictureBox());
+			this->Minimize = (gcnew System::Windows::Forms::PictureBox());
+			this->eXitButton = (gcnew System::Windows::Forms::PictureBox());
+			this->NewNoteHeader = (gcnew System::Windows::Forms::PictureBox());
+			this->UnderlineNoteName = (gcnew System::Windows::Forms::Panel());
+			this->NoteTitleInput = (gcnew System::Windows::Forms::TextBox());
+			this->PassedFilename = (gcnew System::Windows::Forms::PictureBox());
+			this->InvalidFileName = (gcnew System::Windows::Forms::PictureBox());
+			this->CopyrightDisclaimer = (gcnew System::Windows::Forms::Label());
+			this->TitleBar->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->LivelyLogo))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Minimize))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->eXitButton))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NewNoteHeader))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->PassedFilename))->BeginInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->InvalidFileName))->BeginInit();
 			this->SuspendLayout();
 			// 
-			// Lively_TitleBar
+			// TitleBar
 			// 
-			this->Lively_TitleBar->BackColor = System::Drawing::Color::Snow;
-			this->Lively_TitleBar->BorderStyle = System::Windows::Forms::BorderStyle::Fixed3D;
-			this->Lively_TitleBar->Controls->Add(this->Lively_eXit);
-			this->Lively_TitleBar->Controls->Add(this->Lively_Icon);
-			this->Lively_TitleBar->Controls->Add(this->Lively_Minimize);
-			this->Lively_TitleBar->Location = System::Drawing::Point(-3, -3);
-			this->Lively_TitleBar->Name = L"Lively_TitleBar";
-			this->Lively_TitleBar->Size = System::Drawing::Size(656, 47);
-			this->Lively_TitleBar->TabIndex = 0;
-			this->Lively_TitleBar->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Lively::MoveWindow);
+			this->TitleBar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(45)), static_cast<System::Int32>(static_cast<System::Byte>(45)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->TitleBar->Controls->Add(this->LivelyLogo);
+			this->TitleBar->Controls->Add(this->Minimize);
+			this->TitleBar->Controls->Add(this->eXitButton);
+			this->TitleBar->Location = System::Drawing::Point(-3, -3);
+			this->TitleBar->Name = L"TitleBar";
+			this->TitleBar->Size = System::Drawing::Size(656, 47);
+			this->TitleBar->TabIndex = 0;
+			this->TitleBar->MouseDown += gcnew System::Windows::Forms::MouseEventHandler(this, &Lively::MoveWindow);
 			// 
-			// Lively_eXit
+			// LivelyLogo
 			// 
-			this->Lively_eXit->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->Lively_eXit->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Lively_eXit.Image")));
-			this->Lively_eXit->Location = System::Drawing::Point(608, 10);
-			this->Lively_eXit->Name = L"Lively_eXit";
-			this->Lively_eXit->Size = System::Drawing::Size(26, 25);
-			this->Lively_eXit->TabIndex = 1;
-			this->Lively_eXit->TabStop = false;
-			this->Lively_eXit->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Lively::LivelyExit);
+			this->LivelyLogo->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"LivelyLogo.Image")));
+			this->LivelyLogo->Location = System::Drawing::Point(15, 10);
+			this->LivelyLogo->Name = L"LivelyLogo";
+			this->LivelyLogo->Size = System::Drawing::Size(42, 37);
+			this->LivelyLogo->TabIndex = 7;
+			this->LivelyLogo->TabStop = false;
 			// 
-			// Lively_Icon
+			// Minimize
 			// 
-			this->Lively_Icon->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Lively_Icon.Image")));
-			this->Lively_Icon->ImageLocation = L"";
-			this->Lively_Icon->InitialImage = nullptr;
-			this->Lively_Icon->Location = System::Drawing::Point(3, 3);
-			this->Lively_Icon->Name = L"Lively_Icon";
-			this->Lively_Icon->Size = System::Drawing::Size(43, 37);
-			this->Lively_Icon->TabIndex = 0;
-			this->Lively_Icon->TabStop = false;
+			this->Minimize->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->Minimize->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Minimize.Image")));
+			this->Minimize->Location = System::Drawing::Point(566, 14);
+			this->Minimize->Name = L"Minimize";
+			this->Minimize->Size = System::Drawing::Size(27, 31);
+			this->Minimize->TabIndex = 1;
+			this->Minimize->TabStop = false;
+			this->Minimize->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Lively::MinimizeApplication);
 			// 
-			// Lively_Minimize
+			// eXitButton
 			// 
-			this->Lively_Minimize->Cursor = System::Windows::Forms::Cursors::Hand;
-			this->Lively_Minimize->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"Lively_Minimize.Image")));
-			this->Lively_Minimize->Location = System::Drawing::Point(572, 19);
-			this->Lively_Minimize->Name = L"Lively_Minimize";
-			this->Lively_Minimize->Size = System::Drawing::Size(30, 16);
-			this->Lively_Minimize->TabIndex = 2;
-			this->Lively_Minimize->TabStop = false;
-			this->Lively_Minimize->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Lively::LivelyMinimize);
+			this->eXitButton->Cursor = System::Windows::Forms::Cursors::Hand;
+			this->eXitButton->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"eXitButton.Image")));
+			this->eXitButton->Location = System::Drawing::Point(609, 10);
+			this->eXitButton->Name = L"eXitButton";
+			this->eXitButton->Size = System::Drawing::Size(40, 27);
+			this->eXitButton->TabIndex = 0;
+			this->eXitButton->TabStop = false;
+			this->eXitButton->MouseClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Lively::ExitApplication);
 			// 
-			// ConfigPanel
+			// NewNoteHeader
 			// 
-			this->ConfigPanel->Controls->Add(this->Note_Title);
-			this->ConfigPanel->Location = System::Drawing::Point(-3, 40);
-			this->ConfigPanel->Name = L"ConfigPanel";
-			this->ConfigPanel->Size = System::Drawing::Size(656, 65);
-			this->ConfigPanel->TabIndex = 1;
+			this->NewNoteHeader->BackColor = System::Drawing::Color::Transparent;
+			this->NewNoteHeader->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"NewNoteHeader.Image")));
+			this->NewNoteHeader->Location = System::Drawing::Point(12, 50);
+			this->NewNoteHeader->Name = L"NewNoteHeader";
+			this->NewNoteHeader->Size = System::Drawing::Size(298, 144);
+			this->NewNoteHeader->TabIndex = 2;
+			this->NewNoteHeader->TabStop = false;
 			// 
-			// Note_Title
+			// UnderlineNoteName
 			// 
-			this->Note_Title->Font = (gcnew System::Drawing::Font(L"Segoe UI", 11.25F));
-			this->Note_Title->Location = System::Drawing::Point(5, 3);
-			this->Note_Title->Name = L"Note_Title";
-			this->Note_Title->Size = System::Drawing::Size(405, 27);
-			this->Note_Title->TabIndex = 0;
+			this->UnderlineNoteName->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(240)),
+				static_cast<System::Int32>(static_cast<System::Byte>(236)), static_cast<System::Int32>(static_cast<System::Byte>(228)));
+			this->UnderlineNoteName->Location = System::Drawing::Point(26, 256);
+			this->UnderlineNoteName->Name = L"UnderlineNoteName";
+			this->UnderlineNoteName->Size = System::Drawing::Size(298, 4);
+			this->UnderlineNoteName->TabIndex = 3;
+			// 
+			// NoteTitleInput
+			// 
+			this->NoteTitleInput->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(47)), static_cast<System::Int32>(static_cast<System::Byte>(47)),
+				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->NoteTitleInput->BorderStyle = System::Windows::Forms::BorderStyle::None;
+			this->NoteTitleInput->Font = (gcnew System::Drawing::Font(L"Segoe UI", 17.25F));
+			this->NoteTitleInput->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(240)), static_cast<System::Int32>(static_cast<System::Byte>(236)),
+				static_cast<System::Int32>(static_cast<System::Byte>(228)));
+			this->NoteTitleInput->Location = System::Drawing::Point(26, 224);
+			this->NoteTitleInput->Name = L"NoteTitleInput";
+			this->NoteTitleInput->Size = System::Drawing::Size(298, 31);
+			this->NoteTitleInput->TabIndex = 4;
+			// 
+			// PassedFilename
+			// 
+			this->PassedFilename->BackColor = System::Drawing::Color::Transparent;
+			this->PassedFilename->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"PassedFilename.Image")));
+			this->PassedFilename->Location = System::Drawing::Point(331, 224);
+			this->PassedFilename->Name = L"PassedFilename";
+			this->PassedFilename->Size = System::Drawing::Size(31, 31);
+			this->PassedFilename->TabIndex = 5;
+			this->PassedFilename->TabStop = false;
+			this->PassedFilename->Visible = false;
+			// 
+			// InvalidFileName
+			// 
+			this->InvalidFileName->BackColor = System::Drawing::Color::Transparent;
+			this->InvalidFileName->Image = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"InvalidFileName.Image")));
+			this->InvalidFileName->Location = System::Drawing::Point(331, 224);
+			this->InvalidFileName->Name = L"InvalidFileName";
+			this->InvalidFileName->Size = System::Drawing::Size(31, 31);
+			this->InvalidFileName->TabIndex = 6;
+			this->InvalidFileName->TabStop = false;
+			this->InvalidFileName->Visible = false;
+			// 
+			// CopyrightDisclaimer
+			// 
+			this->CopyrightDisclaimer->AutoSize = true;
+			this->CopyrightDisclaimer->BackColor = System::Drawing::Color::Transparent;
+			this->CopyrightDisclaimer->Font = (gcnew System::Drawing::Font(L"Segoe UI", 9.75F, System::Drawing::FontStyle::Italic, System::Drawing::GraphicsUnit::Point,
+				static_cast<System::Byte>(0)));
+			this->CopyrightDisclaimer->ForeColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(240)),
+				static_cast<System::Int32>(static_cast<System::Byte>(236)), static_cast<System::Int32>(static_cast<System::Byte>(228)));
+			this->CopyrightDisclaimer->Location = System::Drawing::Point(235, 489);
+			this->CopyrightDisclaimer->Name = L"CopyrightDisclaimer";
+			this->CopyrightDisclaimer->Size = System::Drawing::Size(167, 17);
+			this->CopyrightDisclaimer->TabIndex = 7;
+			this->CopyrightDisclaimer->Text = L"© 2020 - All rights reserved.";
 			// 
 			// Lively
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(645, 562);
-			this->Controls->Add(this->ConfigPanel);
-			this->Controls->Add(this->Lively_TitleBar);
+			this->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(30)), static_cast<System::Int32>(static_cast<System::Byte>(30)),
+				static_cast<System::Int32>(static_cast<System::Byte>(30)));
+			this->BackgroundImage = (cli::safe_cast<System::Drawing::Image^>(resources->GetObject(L"$this.BackgroundImage")));
+			this->ClientSize = System::Drawing::Size(642, 515);
+			this->Controls->Add(this->CopyrightDisclaimer);
+			this->Controls->Add(this->InvalidFileName);
+			this->Controls->Add(this->PassedFilename);
+			this->Controls->Add(this->NoteTitleInput);
+			this->Controls->Add(this->UnderlineNoteName);
+			this->Controls->Add(this->NewNoteHeader);
+			this->Controls->Add(this->TitleBar);
 			this->Cursor = System::Windows::Forms::Cursors::Arrow;
 			this->FormBorderStyle = System::Windows::Forms::FormBorderStyle::None;
 			this->Icon = (cli::safe_cast<System::Drawing::Icon^>(resources->GetObject(L"$this.Icon")));
 			this->Name = L"Lively";
 			this->Text = L"Lively";
-			this->Lively_TitleBar->ResumeLayout(false);
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Lively_eXit))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Lively_Icon))->EndInit();
-			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Lively_Minimize))->EndInit();
-			this->ConfigPanel->ResumeLayout(false);
-			this->ConfigPanel->PerformLayout();
+			this->TitleBar->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->LivelyLogo))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->Minimize))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->eXitButton))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->NewNoteHeader))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->PassedFilename))->EndInit();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->InvalidFileName))->EndInit();
 			this->ResumeLayout(false);
+			this->PerformLayout();
 
 		}
 
-	private: System::Void LivelyExit(
-		_In_ System::Object^ sender,
+	private: System::Void MoveWindow(
+		_In_opt_ System::Object^ sender,
 		_In_ System::Windows::Forms::MouseEventArgs^ events
 	) {
-		UNREFERENCED_PARAMETER(events);
 		UNREFERENCED_PARAMETER(sender);
+
+		if (events->Button == System::Windows::Forms::MouseButtons::Left)
+		{
+			ReleaseCapture();
+			SendMessage(
+				static_cast<HWND>(this->Handle.ToPointer()),
+				WM_NCLBUTTONDOWN,
+				HTCAPTION,
+				NULL
+			);
+		}
+	}
+
+	private: System::Void ExitApplication(
+		_In_opt_ System::Object^ sender,
+		_In_opt_ System::Windows::Forms::MouseEventArgs^ events
+	) {
+		UNREFERENCED_PARAMETER(sender);
+		UNREFERENCED_PARAMETER(events);
 
 		using MessageBoxOT = System::Windows::Forms::MessageBox;
 		using DialogResult = System::Windows::Forms::DialogResult;
@@ -171,33 +261,15 @@ namespace Lively {
 		}
 	}
 
-	private: System::Void LivelyMinimize(
-		_In_ System::Object^ sender,
-		_In_ System::Windows::Forms::MouseEventArgs^ events
+	private: System::Void MinimizeApplication(
+		_In_opt_ System::Object^ sender,
+		_In_opt_ System::Windows::Forms::MouseEventArgs^ events
 	) {
 		UNREFERENCED_PARAMETER(sender);
 		UNREFERENCED_PARAMETER(events);
 
-		this->WindowState = FormWindowState::Minimized;
+		this->WindowState = System::Windows::Forms::FormWindowState::Minimized;
 	}
-
-	private: System::Void MoveWindow(
-		_In_ System::Object^ sender,
-		_In_ System::Windows::Forms::MouseEventArgs^ events
-	) {
-		UNREFERENCED_PARAMETER(sender);
-
-		if (events->Button == System::Windows::Forms::MouseButtons::Left)
-		{
-			ReleaseCapture();
-			SendMessage(
-				static_cast<HWND>(this->Handle.ToPointer()),
-				WM_NCLBUTTONDOWN,
-				HTCAPTION,
-				NULL
-			);
-		}
-	}
-	};
+};
 }
 #endif
