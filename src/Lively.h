@@ -94,8 +94,7 @@ namespace Lively {
 			// 
 			// TitleBar
 			// 
-			this->TitleBar->BackColor = System::Drawing::Color::FromArgb(static_cast<System::Int32>(static_cast<System::Byte>(45)), static_cast<System::Int32>(static_cast<System::Byte>(45)),
-				static_cast<System::Int32>(static_cast<System::Byte>(48)));
+			this->TitleBar->BackColor = System::Drawing::Color::Transparent;
 			this->TitleBar->Controls->Add(this->LivelyLogo);
 			this->TitleBar->Controls->Add(this->Minimize);
 			this->TitleBar->Controls->Add(this->eXitButton);
