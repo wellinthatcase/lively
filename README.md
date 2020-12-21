@@ -9,4 +9,6 @@ It's still quite base, so stay weary.
 - Here's an [image](https://ibb.co/pncbnwD) as of 12/19/20 (US)
 
 # Known issues
-- The top-right gradient is hardly visible under bright lighting conditions. 
+- The top-right gradient is hardly visible under bright lighting conditions in both the splash-screen & editor. 
+- In the editor, paragraph margins restore to default (which appears as 2 enters typically) after CTRL+A.
+- In the editor, the first line of the RTB word-wraps prematurely. 
