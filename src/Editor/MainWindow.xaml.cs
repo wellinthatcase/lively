@@ -89,19 +89,39 @@ namespace Editor
                 {
                     case Key.S:
                         {
-                            SaveFileDialog res = new SaveFileDialog();
+                            SaveFileDialog dialog = new SaveFileDialog();
 
-                            res.Filter = "Text file (*.txt)|*.txt";
-                            res.FileName = NoteName.Content.ToString();
-                            res.AddExtension = true;
+                            dialog.Filter = "Text file (*.txt)|*.txt";
+                            dialog.FileName = NoteName.Content.ToString();
+                            dialog.AddExtension = true;
 
                             TextRange rng = new TextRange(
                                 TextEntry.Document.ContentStart,
                                 TextEntry.Document.ContentEnd);
 
-                            if (res.ShowDialog() == true)
+                            bool? res = dialog.ShowDialog();
+
+                            if (res == true)
                             {
-                                File.WriteAllText(res.FileName, rng.Text);
+                                File.WriteAllText(dialog.FileName, rng.Text);
+                            }
+
+                            e.Handled = true; 
+                            break;
+                        }
+
+                    case Key.O:
+                        {
+                            OpenFileDialog dialog = new OpenFileDialog();
+                            dialog.Filter = "Text file (*.txt)|*.txt|All files (*.*)|*.*";
+                            bool? res = dialog.ShowDialog();
+
+                            if (res == true)
+                            {
+                                string content = File.ReadAllText(dialog.FileName);
+
+                                TextEntry.Document.Blocks.Clear();
+                                TextEntry.Document.Blocks.Add(new Paragraph(new Run(content)));
                             }
 
                             e.Handled = true; 
