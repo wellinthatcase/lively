@@ -24,6 +24,8 @@ namespace Editor
 {
     public partial class MainWindow : Window
     {
+        static string DialogFilters = "All files (*.*)|*.*|Markdown file (*.md)|*.md|Text file (*.txt)|*.txt";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -91,7 +93,7 @@ namespace Editor
                         {
                             SaveFileDialog dialog = new SaveFileDialog();
 
-                            dialog.Filter = "Text file (*.txt)|*.txt";
+                            dialog.Filter = DialogFilters;
                             dialog.FileName = NoteName.Content.ToString();
                             dialog.AddExtension = true;
 
@@ -113,7 +115,7 @@ namespace Editor
                     case Key.O:
                         {
                             OpenFileDialog dialog = new OpenFileDialog();
-                            dialog.Filter = "Text file (*.txt)|*.txt|All files (*.*)|*.*";
+                            dialog.Filter = DialogFilters;
                             bool? res = dialog.ShowDialog();
 
                             if (res == true)
