@@ -13,6 +13,10 @@ It's still quite base, so stay weary.
 - Here's an [image](https://ibb.co/pncbnwD) as of 12/19/20 (US)
 - Here's an [image](https://ibb.co/4f9B9N6) as of 12/20/20 (US) (EDITOR)
 
+# Platform support
+As of now, Lively is only supported on Windows 10. It is built upon .NET 4.8. 
+In the future, cross-platform to even mobile may be implemented with the recent release of .NET MPAUI.
+
 # Known issues
 - The top-right gradient is hardly visible under bright lighting conditions in both the splash-screen & editor. 
 - In the editor, paragraph margins restore to default (which appears as 2 enters typically) after CTRL+A.
