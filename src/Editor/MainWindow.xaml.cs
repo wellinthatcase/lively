@@ -104,6 +104,7 @@ namespace Editor
                                 File.WriteAllText(res.FileName, rng.Text);
                             }
 
+                            e.Handled = true; 
                             break;
                         }
                 }
