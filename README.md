@@ -1,6 +1,10 @@
 # Lively
 In the future, this will be a modern Notepad for Windows. 
 
+# Intentions
+Lively intends on being a plug & play replacement for the default Notepad application on Windows. 
+The only additional functionality intended is the ability to edit content font (inc. size, color), and support of toggable live WYSIWYG markdown. 
+ 
 # What's it look like so far? 
 It's still quite base, so stay weary. 
 
