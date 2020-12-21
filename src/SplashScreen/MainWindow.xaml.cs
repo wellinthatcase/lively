@@ -60,7 +60,7 @@ namespace Lively
 
         private bool HideSubmitButton()
         {
-            SubmitBtn.Visibility = Visibility.Visible;
+            SubmitBtn.Visibility = Visibility.Hidden;
             return false; 
         }
 
@@ -100,7 +100,7 @@ namespace Lively
                 failed();
             }
 
-            return successfullyPassed ? true : false;
+            return successfullyPassed ? true : HideSubmitButton();
         }
 
         private void LaunchEditorProcess()
