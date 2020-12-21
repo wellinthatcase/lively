@@ -22,7 +22,7 @@ namespace Lively
 {
     public partial class MainWindow : Window
     {
-        static string[] FORBIDDEN_KEYWORDS = { "NUL", "PRN", "CON", "AUX" };
+        static string[] ForbiddenKeywords = { "NUL", "PRN", "CON", "AUX" };
 
         public MainWindow()
         {
@@ -64,21 +64,27 @@ namespace Lively
             return false; 
         }
 
+        private delegate void FalsifyTest();
         private bool LegalizationFunc(string txt)
         {
             txt = txt.Trim();
-            bool successfullyPassed = true; 
+            bool successfullyPassed = true;
 
-            if (FORBIDDEN_KEYWORDS.Contains(txt))
+            FalsifyTest failed = delegate ()
             {
                 successfullyPassed = false;
+            };
+
+            if (ForbiddenKeywords.Contains(txt))
+            {
+                failed();
             }
 
             if (txt.Length == 4
                 && char.IsDigit(txt.Last())
                 && txt.StartsWith("COM") || txt.StartsWith("LPT"))
             {
-                successfullyPassed = false; 
+                failed();
             }
 
             if (txt.Contains("<")
@@ -91,21 +97,34 @@ namespace Lively
                 || txt.Contains("\\")
                 || txt.Contains("\""))
             {
-                successfullyPassed = false; 
+                failed();
             }
 
-            return successfullyPassed ? true : HideSubmitButton();
+            return successfullyPassed ? true : false;
         }
 
-        private void LaunchEditor(object sender, MouseButtonEventArgs e)
+        private void LaunchEditorProcess()
         {
             Process proc = new Process();
 
-            proc.StartInfo.FileName  = "bin\\Editor.exe";
+            proc.StartInfo.FileName = "bin\\Editor.exe";
             proc.StartInfo.Arguments = string.Format("\"{0}\"", NoteName.Text);
             proc.Start();
 
             Application.Current.Shutdown();
+        }
+
+        private void LaunchEditor(object sender, MouseButtonEventArgs e)
+        {
+            LaunchEditorProcess();
+        }
+
+        private void EnsureEnterAsAlternativeToSubmitBtn(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && LegalizationFunc(NoteName.Text))
+            {
+                LaunchEditorProcess();
+            }
         }
     }
 }
