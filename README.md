@@ -14,7 +14,7 @@ It's still quite base, so stay weary.
 - Here's an [image](https://ibb.co/4f9B9N6) as of 12/20/20 (US) (EDITOR)
 
 # Platform support
-As of now, Lively is only supported on Windows 8+ by default. On other versions, you may be able to manually install .NET 4.8 or compatible versions.
+As of now, Lively is only supported on Windows 8+ by default. On other versions, you may be able to manually install .NET Framework 4.8 or compatible versions.
 In the future, cross-platform to even mobile may be implemented with the recent release of .NET MPAUI.
 
 # Known issues
