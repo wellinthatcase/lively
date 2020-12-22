@@ -28,25 +28,40 @@ namespace Editor
         public MainWindow()
         {
             InitializeComponent();
-        }
 
-        private void ExitApplication(object sender, MouseButtonEventArgs e)
-        {
-            MessageBoxResult res = MessageBox.Show(
-                "Are you sure you wanna quit?", 
-                "Confirm", 
-                MessageBoxButton.YesNoCancel);
+            MaxWidth  = SystemParameters.WorkArea.Width;
+            MaxHeight = SystemParameters.WorkArea.Height;
 
-            if (res == MessageBoxResult.Yes)
+            TitleBar.MouseLeftButtonDown += delegate { DragMove(); };
+            Minimize.MouseLeftButtonDown += delegate { WindowState = WindowState.Minimized; };
+
+            eXitButton.MouseLeftButtonDown += delegate
             {
-                Application.Current.Shutdown();
-            }
+                MessageBoxResult res = MessageBox.Show(
+                    "Are you sure you wanna quit?",
+                    "Confirm",
+                    MessageBoxButton.YesNoCancel);
+
+                if (res == MessageBoxResult.Yes)
+                {
+                    Application.Current.Shutdown();
+                }
+            };
         }
 
-        private void MinimizeApplication(object sender, MouseButtonEventArgs e)
-        {
-            WindowState = WindowState.Minimized;
-        }
+        /**
+         * Function: RenderPotentialNoteName
+         *
+         * Renders the potential note name.
+         *
+         * Author: wellinthatcase.
+         *
+         * Date: 12/22/2020.
+         *
+         * Param:
+         * sender -  Source of the event.
+         * e -       Routed event information.
+         */
 
         private void RenderPotentialNoteName(object sender, RoutedEventArgs e)
         {
@@ -72,15 +87,38 @@ namespace Editor
             }
         }
 
-        private void DragWindow(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
+        /**
+         * Function: BringTitleBarToTop
+         *
+         * Brings the title bar to the top to prevent grid overlapping.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         *
+         * Param:
+         * sender -  Source of the event.
+         * e -       Routed event information.
+         */
 
         private void BringTitleBarToTop(object sender, RoutedEventArgs e)
         {
             TitleBar.BringIntoView();
         }
+
+        /**
+         * Function: Keybinder
+         *
+         * Handles common keybinds for the Editor, such as save & open files.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         *
+         * Param:
+         * sender -  Source of the event.
+         * e -       Key event information.
+         */
 
         private void Keybinder(object sender, KeyEventArgs e)
         {
