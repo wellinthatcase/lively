@@ -27,15 +27,23 @@ namespace Lively
         public MainWindow()
         {
             InitializeComponent();
+
+            SplashScreen.MouseLeftButtonDown += delegate { DragMove(); };
         }
 
-        private void DragWindow(object sender, MouseButtonEventArgs e)
-        {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                DragMove();
-            }
-        }
+        /**
+         * Function: FocusInput
+         *
+         * Focuses the user's view onto the main text box on launch.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         *
+         * Param:
+         * sender -  Source of the event.
+         * e -       Routed event information.
+         */
 
         private void FocusInput(object sender, RoutedEventArgs e)
         {
@@ -48,6 +56,20 @@ namespace Lively
             }
         }
 
+        /**
+         * Function: LegalizeCharacters
+         *
+         * Actually calls for a legalization check & determines whether or not to show the submit button.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         *
+         * Param:
+         * sender -  Source of the event.
+         * e -       Text changed event information.
+         */
+
         private void LegalizeCharacters(object sender, TextChangedEventArgs e)
         {
             string txt = NoteName.Text;
@@ -58,13 +80,51 @@ namespace Lively
                     : Visibility.Hidden;
         }
 
+        /**
+         * Function: HideSubmitButton
+         *
+         * Hides the submit button.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         *
+         * Returns: Always false to serve as a failure return type to LegalizationFunc().
+         */
+
         private bool HideSubmitButton()
         {
             SubmitBtn.Visibility = Visibility.Hidden;
             return false; 
         }
 
+        /**
+         * Function: FalsifyTest
+         *
+         * Template delegate type. Will be used to declare a delegate that asserts if legalization has failed.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         */
+
         private delegate void FalsifyTest();
+
+        /**
+         * Function: LegalizationFunc
+         *
+         * Legalization function.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         *
+         * Param:
+         * txt -  The text.
+         *
+         * Returns: True if it succeeds, false if it fails.
+         */
+
         private bool LegalizationFunc(string txt)
         {
             txt = txt.Trim();
@@ -103,6 +163,16 @@ namespace Lively
             return successfullyPassed ? true : HideSubmitButton();
         }
 
+        /**
+         * Function: LaunchEditorProcess
+         *
+         * Actually launches the editor. 
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         */
+
         private void LaunchEditorProcess()
         {
             Process proc = new Process();
@@ -114,14 +184,42 @@ namespace Lively
             Application.Current.Shutdown();
         }
 
+        /**
+         * Function: LaunchEditor
+         *
+         * Serves as a bridge wiring UI interactions that may call for the editor to be launched. 
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         *
+         * Param:
+         * sender -  Source of the event.
+         * e -       Mouse button event information.
+         */
+
         private void LaunchEditor(object sender, MouseButtonEventArgs e)
         {
             LaunchEditorProcess();
         }
 
+        /**
+         * Function: EnsureEnterAsAlternativeToSubmitBtn
+         *
+         * Ensures that the Enter key is an alternative to the submit button.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/22/2020
+         *
+         * Param:
+         * sender -  Source of the event.
+         * e -       Key event information.
+         */
+
         private void EnsureEnterAsAlternativeToSubmitBtn(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && LegalizationFunc(NoteName.Text))
+            if (e.Key == Key.Enter && SubmitBtn.IsVisible)
             {
                 LaunchEditorProcess();
             }
