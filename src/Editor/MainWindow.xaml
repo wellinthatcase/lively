@@ -1,7 +1,7 @@
 <!-- =============================================== -->
 <!--		    © 2020 - All rights reserved.        -->
 <!-- =============================================== -->
-    
+
 <Window x:Name="Editor" x:Class="Editor.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -33,15 +33,20 @@
         </LinearGradientBrush>
     </Window.OpacityMask>
     <Grid x:Name="EditorBody" Background="Transparent" Margin="-15,0,0,0">
-        <RichTextBox x:Name="TextEntry" SelectionBrush="#FF340707" HorizontalAlignment="Right" Height="410" Margin="0,40,0,0" VerticalAlignment="Top" Width="799" Background="Transparent" Foreground="#FFF2EEE5" BorderBrush="Transparent" FontSize="18" BorderThickness="0" CaretBrush="#FFF2EEE5" AcceptsTab="True" FontStretch="SemiCondensed" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" KeyDown="Keybinder">
+        <RichTextBox Padding="0,0,0,0" x:Name="TextEntry" SelectionBrush="#FF340707" HorizontalAlignment="Right" Height="410" Margin="0,40,0,0" VerticalAlignment="Top" Width="799" Background="Transparent" Foreground="#FFF2EEE5" BorderBrush="Transparent" FontSize="18" BorderThickness="0" CaretBrush="#FFF2EEE5" AcceptsTab="True" FontStretch="SemiCondensed" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" KeyDown="Keybinder">
+            <RichTextBox.Resources>
+                <Style TargetType="{x:Type Paragraph}">
+                    <Setter Property="Margin" Value="0"/>
+                </Style>
+            </RichTextBox.Resources>
             <FlowDocument>
                 <Paragraph Margin="0,0,0,0"/>
             </FlowDocument>
         </RichTextBox>
         <Image x:Name="Logo" HorizontalAlignment="Left" Height="32" Margin="16,0,0,0" VerticalAlignment="Top" Width="32" Source="src/Assets/Core/Lively_32x32.png"/>
         <Label x:Name="NoteName" Content="Untitled note." HorizontalAlignment="Left" Margin="53,0,0,0" VerticalAlignment="Top" Width="169" Height="32" Foreground="#FFF2EEE5" FontSize="14" TextOptions.TextHintingMode="Animated" FontFamily="Segoe UI Semilight" Loaded="RenderPotentialNoteName"/>
-        <Image x:Name="eXitButton" HorizontalAlignment="Left" Height="32" Margin="784,0,0,0" VerticalAlignment="Top" Width="32" Source="src/Assets/Core/GrayeXit.png" Cursor="Hand" MouseLeftButtonDown="ExitApplication" ForceCursor="True"/>
-        <Image HorizontalAlignment="Left" Height="32" Margin="753,0,0,0" VerticalAlignment="Top" Width="31" Source="src/Assets/Core/GrayMinimize.png" MouseLeftButtonDown="MinimizeApplication" Cursor="Hand" ForceCursor="True"/>
+        <Image x:Name="eXitButton" HorizontalAlignment="Left" Height="32" Margin="784,0,0,0" VerticalAlignment="Top" Width="32" Source="src/Assets/Core/GrayeXit.png" Cursor="Hand" ForceCursor="True"/>
+        <Image x:Name="Minimize" HorizontalAlignment="Left" Height="32" Margin="748,0,0,0" VerticalAlignment="Top" Width="31" Source="src/Assets/Core/GrayMinimize.png" Cursor="Hand" ForceCursor="True"/>
         <Canvas HorizontalAlignment="Left" Height="4" Margin="16,32,0,0" VerticalAlignment="Top" Width="800">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -60,7 +65,7 @@
                 </LinearGradientBrush>
             </Canvas.Background>
         </Canvas>
-        <Canvas x:Name="TitleBar" HorizontalAlignment="Left" Height="35" Margin="160,0,0,0" VerticalAlignment="Top" Width="588" MouseLeftButtonDown="DragWindow">
+        <Canvas x:Name="TitleBar" HorizontalAlignment="Left" Height="35" Margin="156,0,0,0" VerticalAlignment="Top" Width="561">
             <Canvas.Background>
                 <SolidColorBrush Color="Black" Opacity="0"/>
             </Canvas.Background>
