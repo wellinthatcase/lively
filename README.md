@@ -22,7 +22,7 @@ Until Lively is completed, the binaries are private. Early 2021 fits as a good t
 
 # Known issues
 - The top-right gradient is hardly visible under bright lighting conditions in both the splash-screen & editor. 
-- In the editor, paragraph margins restore to default (which appears as 2 enters typically) after CTRL+A.
+- ~~In the editor, paragraph margins restore to default (which appears as 2 enters typically) after CTRL+A.~~
 - In the editor, the first line of the RTB word-wraps prematurely. 
 
 # Other
