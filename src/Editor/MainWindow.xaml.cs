@@ -12,7 +12,6 @@ using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shell;
-using System.Windows.Shapes;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
@@ -120,8 +119,16 @@ namespace Editor
 
                             if (res == true)
                             {
-                                string content = File.ReadAllText(dialog.FileName);
+                                string filName = dialog.FileName;
+                                string content = File.ReadAllText(filName);
+                                string nNoteId = Path.GetFileNameWithoutExtension(filName);
 
+                                if (nNoteId.Length >= 20)
+                                {
+                                    nNoteId = nNoteId.Substring(0, 15) + "...";
+                                }
+
+                                NoteName.Content = nNoteId;
                                 TextEntry.Document.Blocks.Clear();
                                 TextEntry.Document.Blocks.Add(new Paragraph(new Run(content)));
                             }
