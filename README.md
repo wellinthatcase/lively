@@ -31,6 +31,8 @@ Until Lively is completed, the binaries are private. Early 2021 fits as a good t
 - In the editor, the first line of the RTB word-wraps prematurely. 
 - In the Markdown WebBrowser, the hidden scrollbar prevents scrollbar functionality unless you select text and drag the mouse down. 
 - The Markdown WebBrowser has no style. 
+- When the main text editor isn't in focus, CTRL+P invokes the print windows procedure.
+    - As a workaround, under the browser, there's a tiny black bar you can click to re-focus the main text editor. This regains intended CTRL+P functionality. 
 
 # Other
 - If Lively is fully protected by copyright, how come it's open source?
