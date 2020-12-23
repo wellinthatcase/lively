@@ -5,6 +5,11 @@ In the future, this will be a modern Notepad for Windows.
 Lively intends on being a plug & play replacement for the default Notepad application on Windows. 
 The only additional functionality intended is the ability to edit content font (inc. size, color), and support of toggable live WYSIWYG markdown. 
  
+# Using Lively
+In the main editor, Lively has good support of rich formatting. Most notably, CTRL+B to enable bold text, and CTRL+I to use italic. 
+Alternatively, you can press CTRL+P to display your text in full HTML Markdown in an embedded browser. 
+As of now, this browser has no style. However, the markdown does work to full extent. 
+
 # What's it look like so far? 
 It's still quite base, so stay weary. 
 
@@ -24,6 +29,8 @@ Until Lively is completed, the binaries are private. Early 2021 fits as a good t
 - The top-right gradient is hardly visible under bright lighting conditions in both the splash-screen & editor. 
 - ~~In the editor, paragraph margins restore to default (which appears as 2 enters typically) after CTRL+A.~~
 - In the editor, the first line of the RTB word-wraps prematurely. 
+- In the Markdown WebBrowser, the hidden scrollbar prevents scrollbar functionality unless you select text and drag the mouse down. 
+- The Markdown WebBrowser has no style. 
 
 # Other
 - If Lively is fully protected by copyright, how come it's open source?
