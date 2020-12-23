@@ -7,9 +7,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
         xmlns:local="clr-namespace:Editor"
         mc:Ignorable="d"
-        Title="Editor" Height="450" Width="800" AllowsTransparency="True" WindowStyle="None" Icon="src/Assets/Core/Lively.ico" Cursor="Arrow" Loaded="BringTitleBarToTop">
+        Title="Editor" Height="450" Width="800" AllowsTransparency="False" WindowStyle="None" Icon="src/Assets/Core/Lively.ico" Cursor="Arrow" Loaded="BringTitleBarToTop">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <LinearGradientBrush.RelativeTransform>
@@ -33,7 +34,11 @@
         </LinearGradientBrush>
     </Window.OpacityMask>
     <Grid x:Name="EditorBody" Background="Transparent" Margin="-15,0,0,0">
-        <RichTextBox Padding="0,0,0,0" x:Name="TextEntry" SelectionBrush="#FF340707" HorizontalAlignment="Right" Height="410" Margin="0,40,0,0" VerticalAlignment="Top" Width="799" Background="Transparent" Foreground="#FFF2EEE5" BorderBrush="Transparent" FontSize="18" BorderThickness="0" CaretBrush="#FFF2EEE5" AcceptsTab="True" FontStretch="SemiCondensed" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" KeyDown="Keybinder">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <RichTextBox Padding="0,0,0,0" x:Name="TextEntry" SelectionBrush="#FF340707" HorizontalAlignment="Right" Height="410" Margin="0,40,0,-8" VerticalAlignment="Top" Width="799" Background="Transparent" Foreground="#FFF2EEE5" BorderBrush="Transparent" FontSize="18" BorderThickness="0" CaretBrush="#FFF2EEE5" AcceptsTab="True" FontStretch="SemiCondensed" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" KeyDown="Keybinder" Grid.RowSpan="2">
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>
@@ -45,9 +50,9 @@
         </RichTextBox>
         <Image x:Name="Logo" HorizontalAlignment="Left" Height="32" Margin="16,0,0,0" VerticalAlignment="Top" Width="32" Source="src/Assets/Core/Lively_32x32.png"/>
         <Label x:Name="NoteName" Content="Untitled note." HorizontalAlignment="Left" Margin="53,0,0,0" VerticalAlignment="Top" Width="169" Height="32" Foreground="#FFF2EEE5" FontSize="14" TextOptions.TextHintingMode="Animated" FontFamily="Segoe UI Semilight" Loaded="RenderPotentialNoteName"/>
-        <Image x:Name="eXitButton" HorizontalAlignment="Left" Height="32" Margin="784,0,0,0" VerticalAlignment="Top" Width="32" Source="src/Assets/Core/GrayeXit.png" Cursor="Hand" ForceCursor="True"/>
-        <Image x:Name="Minimize" HorizontalAlignment="Left" Height="32" Margin="748,0,0,0" VerticalAlignment="Top" Width="31" Source="src/Assets/Core/GrayMinimize.png" Cursor="Hand" ForceCursor="True"/>
-        <Canvas HorizontalAlignment="Left" Height="4" Margin="16,32,0,0" VerticalAlignment="Top" Width="800">
+        <Image x:Name="ExitAppw" HorizontalAlignment="Left" Height="32" Margin="784,-1,-9,0" VerticalAlignment="Top" Width="32" Source="src/Assets/Core/GrayeXit.png" Cursor="Hand" ForceCursor="True"/>
+        <Image x:Name="Minimize" HorizontalAlignment="Left" Height="32" Margin="753,-1,0,0" VerticalAlignment="Top" Width="31" Source="src/Assets/Core/GrayMinimize.png" Cursor="Hand" ForceCursor="True"/>
+        <Canvas HorizontalAlignment="Left" Height="4" Margin="16,32,-9,0" VerticalAlignment="Top" Width="800">
             <Canvas.Background>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <LinearGradientBrush.RelativeTransform>
@@ -65,10 +70,11 @@
                 </LinearGradientBrush>
             </Canvas.Background>
         </Canvas>
-        <Canvas x:Name="TitleBar" HorizontalAlignment="Left" Height="35" Margin="156,0,0,0" VerticalAlignment="Top" Width="561">
+        <Canvas x:Name="TitleBar" HorizontalAlignment="Left" Height="35" Margin="153,0,0,0" VerticalAlignment="Top" Width="595">
             <Canvas.Background>
                 <SolidColorBrush Color="Black" Opacity="0"/>
             </Canvas.Background>
         </Canvas>
+        <WebBrowser x:Name="Markdown" HorizontalAlignment="Left" Height="406" Margin="16,36,-9,0" VerticalAlignment="Top" Width="800" Grid.RowSpan="2"/>
     </Grid>
 </Window>
