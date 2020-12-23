@@ -4,20 +4,11 @@
 
 using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using Microsoft.Win32;
-using System.Windows.Data;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Shell;
-using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Navigation;
-using System.Collections.Generic;
-using System.Windows.Media.Imaging;
 
 namespace Editor
 {
@@ -29,13 +20,17 @@ namespace Editor
         {
             InitializeComponent();
 
-            MaxWidth  = SystemParameters.WorkArea.Width;
-            MaxHeight = SystemParameters.WorkArea.Height;
+            Markdown.Visibility = Visibility.Hidden;
+            TextEntry.BringIntoView();
 
+            MaxWidth   = SystemParameters.WorkArea.Width;
+            MaxHeight  = SystemParameters.WorkArea.Height;
+            ResizeMode = ResizeMode.NoResize;
+
+            Markdown.LoadCompleted       += delegate { Markdown.InvokeScript("execScript", new object[] { "document.body.style.overflow ='hidden'", "JavaScript" }); };
             TitleBar.MouseLeftButtonDown += delegate { DragMove(); };
             Minimize.MouseLeftButtonDown += delegate { WindowState = WindowState.Minimized; };
-
-            eXitButton.MouseLeftButtonDown += delegate
+            ExitAppw.MouseLeftButtonDown += delegate
             {
                 MessageBoxResult res = MessageBox.Show(
                     "Are you sure you wanna quit?",
@@ -173,6 +168,29 @@ namespace Editor
 
                             e.Handled = true; 
                             break;
+                        }
+
+                    case Key.P:
+                        {
+                            if (!Markdown.IsVisible)
+                            {
+                                TextRange rng = new TextRange(
+                                    TextEntry.Document.ContentStart,
+                                    TextEntry.Document.ContentEnd);
+
+                                Markdown.Focus(); 
+                                Markdown.BringIntoView();
+                                Markdown.Visibility = Visibility.Visible;
+                                Markdown.NavigateToString(Markdig.Markdown.ToHtml(rng.Text));
+                            }
+                            else
+                            {
+                                TextEntry.BringIntoView();
+                                Markdown.Visibility = Visibility.Hidden;
+                            }
+
+                            e.Handled = true; 
+                            break; 
                         }
                 }
             }
