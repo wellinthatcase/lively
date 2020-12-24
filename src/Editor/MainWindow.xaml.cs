@@ -28,7 +28,6 @@ namespace Editor
             MaxHeight  = SystemParameters.WorkArea.Height;
             ResizeMode = ResizeMode.NoResize;
 
-            //Markdown.LoadCompleted       += delegate { Markdown.InvokeScript("execScript", new object[] { "document.body.style.overflow ='hidden'", "JavaScript" }); };
             TitleBar.MouseLeftButtonDown += delegate { DragMove(); };
             Minimize.MouseLeftButtonDown += delegate { WindowState = WindowState.Minimized; };
             ExitAppw.MouseLeftButtonDown += delegate
@@ -192,7 +191,6 @@ namespace Editor
                                 await Markdown.EnsureCoreWebView2Async();
 
                                 Markdown.Focus();
-                                Markdown.InputHitTest(new Point(0, 0));
                                 Markdown.BringIntoView();
                                 Markdown.Visibility = Visibility.Visible;
                                 Markdown.NavigateToString(htContent);
@@ -209,6 +207,20 @@ namespace Editor
                 }
             }
         }
+
+        /**
+         * Function: DodgePrintPrompt
+         *
+         * Prevents the print prompt from displaying when CTRL+P is pressed on the markdown viewer.
+         *
+         * Author: wellinthatcase
+         *
+         * Date: 12/23/2020
+         *
+         * Parameters:
+         * sender -    Source of the event.
+         * e -         Key event information.
+         */
 
         private void DodgePrintPrompt(object sender, KeyEventArgs e)
         {
