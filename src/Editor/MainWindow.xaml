@@ -9,6 +9,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:mdxam="clr-namespace:MdXaml;assembly=MdXaml"
         xmlns:local="clr-namespace:Editor"
+        xmlns:wv2="clr-namespace:Microsoft.Web.WebView2.Wpf;assembly=Microsoft.Web.WebView2.Wpf"
         mc:Ignorable="d"
         Title="Editor" Height="450" Width="800" AllowsTransparency="False" WindowStyle="None" Icon="src/Assets/Core/Lively.ico" Cursor="Arrow" Loaded="BringTitleBarToTop">
     <Window.Background>
@@ -38,7 +39,7 @@
             <RowDefinition Height="9*"/>
             <RowDefinition Height="17*"/>
         </Grid.RowDefinitions>
-        <RichTextBox Padding="0,0,0,0" x:Name="TextEntry" SelectionBrush="#FF340707" HorizontalAlignment="Right" Height="410" Margin="0,40,0,-8" VerticalAlignment="Top" Width="799" Background="Transparent" Foreground="#FFF2EEE5" BorderBrush="Transparent" FontSize="18" BorderThickness="0" CaretBrush="#FFF2EEE5" AcceptsTab="True" FontStretch="SemiCondensed" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" KeyDown="Keybinder" Grid.RowSpan="2">
+        <RichTextBox Padding="0,0,0,0" x:Name="TextEntry" SelectionBrush="#FF340707" HorizontalAlignment="Right" Height="410" Margin="0,40,0,-8" VerticalAlignment="Top" Width="799" Background="Transparent" Foreground="#FFF2EEE5" BorderBrush="Transparent" FontSize="18" BorderThickness="0" CaretBrush="#FFF2EEE5" AcceptsTab="True" FontStretch="SemiCondensed" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" KeyDown="KeybinderAsync" Grid.RowSpan="2">
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>
@@ -75,6 +76,8 @@
                 <SolidColorBrush Color="Black" Opacity="0"/>
             </Canvas.Background>
         </Canvas>
-        <WebBrowser x:Name="Markdown" HorizontalAlignment="Left" Height="406" Margin="16,36,-9,0" VerticalAlignment="Top" Width="800" Grid.RowSpan="2"/>
+        <DockPanel>
+            <wv2:WebView2 Name="Markdown" Margin="16,36,0,-289" Width="796" KeyDown="DodgePrintPrompt" ClipToBounds="True" Focusable="True"/>
+        </DockPanel>
     </Grid>
 </Window>
