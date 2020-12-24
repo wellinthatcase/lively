@@ -25,14 +25,14 @@ In the future, cross-platform to even mobile may be implemented with the recent 
 # When is release? 
 Until Lively is completed, the binaries are private. Early 2021 fits as a good time to expect a release.
 
+# Dependencies
+The only dependency that may need to be installed is the most recent Microsoft Edge runtime. 
+When the markdown viewer becomes an optional module, this depenedency will be optional with that.
+
 # Known issues
 - The top-right gradient is hardly visible under bright lighting conditions in both the splash-screen & editor. 
-- ~~In the editor, paragraph margins restore to default (which appears as 2 enters typically) after CTRL+A.~~
 - In the editor, the first line of the RTB word-wraps prematurely. 
-- In the Markdown WebBrowser, the hidden scrollbar prevents scrollbar functionality unless you select text and drag the mouse down. 
-- The Markdown WebBrowser has no style. 
-- When the main text editor isn't in focus, CTRL+P invokes the print windows procedure.
-    - As a workaround, under the browser, there's a tiny black bar you can click to re-focus the main text editor. This regains intended CTRL+P functionality. 
+- In the Markdown WebView2, the hidden scrollbar prevents scrollbar functionality. 
 
 # Other
 - If Lively is fully protected by copyright, how come it's open source?
