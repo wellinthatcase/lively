@@ -7,6 +7,7 @@ using System.IO;
 using System.Windows;
 using Microsoft.Win32;
 using System.Windows.Input;
+using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Documents;
 
@@ -27,7 +28,7 @@ namespace Editor
             MaxHeight  = SystemParameters.WorkArea.Height;
             ResizeMode = ResizeMode.NoResize;
 
-            Markdown.LoadCompleted       += delegate { Markdown.InvokeScript("execScript", new object[] { "document.body.style.overflow ='hidden'", "JavaScript" }); };
+            //Markdown.LoadCompleted       += delegate { Markdown.InvokeScript("execScript", new object[] { "document.body.style.overflow ='hidden'", "JavaScript" }); };
             TitleBar.MouseLeftButtonDown += delegate { DragMove(); };
             Minimize.MouseLeftButtonDown += delegate { WindowState = WindowState.Minimized; };
             ExitAppw.MouseLeftButtonDown += delegate
@@ -115,7 +116,7 @@ namespace Editor
          * e -       Key event information.
          */
 
-        private void Keybinder(object sender, KeyEventArgs e)
+        private async void KeybinderAsync(object sender, KeyEventArgs e)
         {
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
@@ -123,11 +124,12 @@ namespace Editor
                 {
                     case Key.S:
                         {
-                            SaveFileDialog dialog = new SaveFileDialog();
-
-                            dialog.Filter = DialogFilters;
-                            dialog.FileName = NoteName.Content.ToString();
-                            dialog.AddExtension = true;
+                            SaveFileDialog dialog = new SaveFileDialog
+                            {
+                                Filter = DialogFilters,
+                                FileName = NoteName.Content.ToString(),
+                                AddExtension = true
+                            };
 
                             TextRange rng = new TextRange(
                                 TextEntry.Document.ContentStart,
@@ -146,8 +148,11 @@ namespace Editor
 
                     case Key.O:
                         {
-                            OpenFileDialog dialog = new OpenFileDialog();
-                            dialog.Filter = DialogFilters;
+                            OpenFileDialog dialog = new OpenFileDialog
+                            {
+                                Filter = DialogFilters
+                            };
+
                             bool? res = dialog.ShowDialog();
 
                             if (res == true)
@@ -178,10 +183,19 @@ namespace Editor
                                     TextEntry.Document.ContentStart,
                                     TextEntry.Document.ContentEnd);
 
-                                Markdown.Focus(); 
+                                string cssString = ":not(h1,h2,h3,h4,h5,h6) { font-size: 11px; } * { overflow: hidden; background-color: rgb(15, 2, 2); color: rgb(242, 238, 229); font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; }";
+                                string htContent = string.Format("<!DOCTYPE html><html><head><link rel='stylesheet' type='text/css'" 
+                                    + "href='data:text/css;charset=UTF-8,{0}'></head><body>{1}</body></html>",
+                                    Uri.EscapeUriString(cssString),
+                                    Markdig.Markdown.ToHtml(rng.Text));
+
+                                await Markdown.EnsureCoreWebView2Async();
+
+                                Markdown.Focus();
+                                Markdown.InputHitTest(new Point(0, 0));
                                 Markdown.BringIntoView();
                                 Markdown.Visibility = Visibility.Visible;
-                                Markdown.NavigateToString(Markdig.Markdown.ToHtml(rng.Text));
+                                Markdown.NavigateToString(htContent);
                             }
                             else
                             {
@@ -194,6 +208,11 @@ namespace Editor
                         }
                 }
             }
+        }
+
+        private void DodgePrintPrompt(object sender, KeyEventArgs e)
+        {
+            KeybinderAsync(sender, e);
         }
     }
 }
