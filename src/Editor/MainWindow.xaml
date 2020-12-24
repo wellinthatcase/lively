@@ -39,10 +39,11 @@
             <RowDefinition Height="9*"/>
             <RowDefinition Height="17*"/>
         </Grid.RowDefinitions>
-        <RichTextBox Padding="0,0,0,0" x:Name="TextEntry" SelectionBrush="#FF340707" HorizontalAlignment="Right" Height="410" Margin="0,40,0,-8" VerticalAlignment="Top" Width="799" Background="Transparent" Foreground="#FFF2EEE5" BorderBrush="Transparent" FontSize="18" BorderThickness="0" CaretBrush="#FFF2EEE5" AcceptsTab="True" FontStretch="SemiCondensed" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" KeyDown="KeybinderAsync" Grid.RowSpan="2">
+        <RichTextBox Padding="0,0,0,0" x:Name="TextEntry" SelectionBrush="#FF340707" HorizontalAlignment="Right" Height="410" Margin="0,40,0,-8" VerticalAlignment="Top" Width="799" Background="Transparent" Foreground="#FFF2EEE5" BorderBrush="Transparent" FontSize="15" BorderThickness="0" CaretBrush="#FFF2EEE5" AcceptsTab="True" FontStretch="SemiCondensed" TextOptions.TextFormattingMode="Display" TextOptions.TextHintingMode="Animated" KeyDown="KeybinderAsync" Grid.RowSpan="2">
             <RichTextBox.Resources>
                 <Style TargetType="{x:Type Paragraph}">
                     <Setter Property="Margin" Value="0"/>
+                    <Setter Property="FontSize" Value="15"/>
                 </Style>
             </RichTextBox.Resources>
             <FlowDocument>
