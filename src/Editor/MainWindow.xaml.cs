@@ -3,6 +3,7 @@
 // =============================================== //
 
 using System;
+using Markdig;
 using System.IO;
 using System.Windows;
 using Microsoft.Win32;
@@ -182,23 +183,31 @@ namespace Editor
                                     TextEntry.Document.ContentStart,
                                     TextEntry.Document.ContentEnd);
 
-                                string cssString = ":not(h1,h2,h3,h4,h5,h6) { font-size: 11px; } * { overflow: hidden; background-color: rgb(15, 2, 2); color: rgb(242, 238, 229); font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; }";
+                                MarkdownPipeline pipe = new MarkdownPipelineBuilder()
+                                    .ConfigureNewLine("<br />")
+                                    .UseAdvancedExtensions()
+                                    .Build();
+
+                                string cssString = ":not(h1,h2,h3,h4,h5,h6) { font-size: 11px; } * { overflow: hidden visible; background-color: rgb(15, 2, 2); color: rgb(242, 238, 229); font-family: Segoe UI,Frutiger,Frutiger Linotype,Dejavu Sans,Helvetica Neue,Arial,sans-serif; }";
                                 string htContent = string.Format("<!DOCTYPE html><html><head><link rel='stylesheet' type='text/css'" 
                                     + "href='data:text/css;charset=UTF-8,{0}'></head><body>{1}</body></html>",
                                     Uri.EscapeUriString(cssString),
-                                    Markdig.Markdown.ToHtml(rng.Text));
+                                    Markdig.Markdown.ToHtml(rng.Text, pipe));
 
-                                await Markdown.EnsureCoreWebView2Async();
+                                if (Markdown.Source == null)
+                                {
+                                    await Markdown.EnsureCoreWebView2Async();
+                                }
 
-                                Markdown.Focus();
+                                Markdown.NavigateToString(htContent);
+
                                 Markdown.BringIntoView();
                                 Markdown.Visibility = Visibility.Visible;
-                                Markdown.NavigateToString(htContent);
                             }
                             else
                             {
                                 TextEntry.BringIntoView();
-                                Markdown.Visibility = Visibility.Hidden;
+                                Markdown.Visibility = Visibility.Hidden; 
                             }
 
                             e.Handled = true; 
