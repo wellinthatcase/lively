@@ -33,6 +33,8 @@ When the markdown viewer becomes an optional module, this depenedency will be op
 - The top-right gradient is hardly visible under bright lighting conditions in both the splash-screen & editor. 
 - In the editor, the first line of the RTB word-wraps prematurely. 
 - In the Markdown WebView2, the hidden scrollbar prevents scrollbar functionality. 
+- In the Markdown WebView2, you must click the white box for style & html to appear. 
+- In the Markdown WebView2, dots for ordered lists, among others, are invisible. 
 
 # Other
 - If Lively is fully protected by copyright, how come it's open source?
