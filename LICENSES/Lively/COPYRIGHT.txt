@@ -1,11 +1,17 @@
-Copyright © 2020 - All rights reserved. 
+Copyright © 2021 - All rights reserved. 
 
-This is an unlicensed repository, hence, you are given no rights
-besides those pre-determined in SECTION F, PARAGRAPH 1 of the GitHub
-Terms Of Service.
+This is an unlicensed repository, therefore, you are given no rights
+besides those stated in SECTION F, PARAGRAPH 1 of the GitHub
+Terms Of Service, along with the rights determined in this text file.
 
-(a) You are permitted only to view, and/or fork this repository. 
-(b) You are only permitted to view, and/or fork forked repositories. 
-(c) Unauthorized distribution or alteration of this Software and/or the underlying source code is forbidden.
+All images associated with Lively in both binary & source form are protected under full copyright. 
+
+(a) You are permitted only to view, and/or fork this repository.
+(b) You are permitted only to view, and/or fork forked repositories.
+(c) You are permitted only to view the files within this Software. This goes for both source form, and binary form.
+(d) You are permitted only to view the images within this Software. This goes for both source form, and binary form. 
+(e) Unauthorized distribution or alteration of this Software, either in source form, or binary form, is forbidden. 
+
+(f) You are permitted to decompile or dissassemble Lively executables for the only, exclusive & singular act of viewing the decompiled or dissembled code of Lively.
 
 If you seek a private license, contact me. 
