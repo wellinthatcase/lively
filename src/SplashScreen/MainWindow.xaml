@@ -1,5 +1,5 @@
 <!-- =============================================== -->
-<!--		    © 2020 - All rights reserved.        -->
+<!--		    © 2021 - All rights reserved.        -->
 <!-- =============================================== -->
 
 <Window x:Name="Lively" x:Class="Lively.MainWindow"
@@ -7,7 +7,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Lively"
         mc:Ignorable="d"
         Title="Lively" Height="450" Width="662" Foreground="Black" WindowStyle="None" ResizeMode="CanMinimize" WindowStartupLocation="CenterScreen" Cursor="Arrow" TextOptions.TextHintingMode="Animated">
     <Window.Background>
