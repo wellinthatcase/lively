@@ -218,28 +218,25 @@ namespace Editor
 
         private string MeasureNoteName(string text)
         {
-            using (wfGraphics gfx = wfGraphics.FromImage(new wfBitmap(1, 1)))
+            wfFont font = new wfFont(
+                TextEntry.FontFamily.ToString(),
+                (float)TextEntry.FontSize,
+                wfFontStyle.Regular,
+                wfGfxUnit.Point);
+
+            int pxMaxContentLen = (int)NoteName.ActualWidth;
+
+            if (text.WidthInPixels(font) >= pxMaxContentLen)
             {
-                wfFont font = new wfFont(
-                    TextEntry.FontFamily.ToString(),
-                    (float)TextEntry.FontSize,
-                    wfFontStyle.Regular,
-                    wfGfxUnit.Point);
+                int chunkSize = 3;
+                string buffer = string.Empty;
 
-                int pxMaxContentLen = (int)NoteName.ActualWidth;
+                IEnumerable<string> segments = Enumerable.Range(0, text.Length / chunkSize)
+                    .Select(index => text.Substring(index * chunkSize, chunkSize))
+                    .TakeWhile(st => EditBuffer(ref buffer, st, pxMaxContentLen, font))
+                    .ToArray();
 
-                if (text.WidthInPixels(font) >= pxMaxContentLen)
-                {
-                    int chunkSize  = 3;
-                    string buffer  = string.Empty;
-
-                    IEnumerable<string> segments = Enumerable.Range(0, text.Length / chunkSize)
-                        .Select(index => text.Substring(index * chunkSize, chunkSize))
-                        .TakeWhile(st => EditBuffer(ref buffer, st, pxMaxContentLen, font))
-                        .ToArray();
-                     
-                    text = string.Join(string.Empty, segments) + "...";
-                }
+                text = string.Join(string.Empty, segments) + "...";
             }
 
             return text;
