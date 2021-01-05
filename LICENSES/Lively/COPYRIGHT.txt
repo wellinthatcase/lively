@@ -1,4 +1,4 @@
-Copyright © 2021 - All rights reserved. 
+Copyright © 2021 Lively Contributors - All rights reserved. 
 
 This is an unlicensed repository, therefore, you are given no rights
 besides those stated in SECTION F, PARAGRAPH 1 of the GitHub
