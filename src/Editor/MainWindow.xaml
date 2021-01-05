@@ -1,5 +1,5 @@
 <!-- =============================================== -->
-<!--		    © 2020 - All rights reserved.        -->
+<!--		    © 2021 - All rights reserved.        -->
 <!-- =============================================== -->
 
 <Window x:Name="Editor" x:Class="Editor.MainWindow"
